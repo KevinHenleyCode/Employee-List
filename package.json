@@ -1,0 +1,22 @@
+{
+  "name": "homework_week_10",
+  "version": "1.0.0",
+  "description": "week 10 homework",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KevinHenleyCode/homework_week_10.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KevinHenleyCode/homework_week_10/issues"
+  },
+  "homepage": "https://github.com/KevinHenleyCode/homework_week_10#readme",
+  "dependencies": {
+    "inquirer": "^8.0.0"
+  }
+}
