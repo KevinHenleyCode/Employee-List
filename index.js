@@ -19,7 +19,7 @@ const htmlContent = (userInput) =>
     <ul>
         <li>Manager: ${userInput.manager}</li>
         <li>Engineer: ${userInput.engineer}</li>
-        <li>Intern: ${userInput.intern}</li>
+        <li>Intern: ${userInput.name}</li>
     </ul>
 
         <script src="index.js"></script>
@@ -46,11 +46,9 @@ inquirer.prompt([
         type: 'input',
         name: 'intern',
         message: "What's your intern's name?",
-        choice: {
-            type: 'input',
-            name: 'id',
-            message: 'Id number.'
-            }
+        cap: function(name){
+            return name.toUpperCase
+        }
     },
 ])
     // 
@@ -58,11 +56,12 @@ inquirer.prompt([
 
         const htmlFile = htmlContent(userInput);
 
-        test(userInput)
+        // test(userInput)
 
         // 
         fs.writeFile('index.html', htmlFile, (error) =>
-            error ? console.log(error) : console.log('Your html is ready!'));
+            error ? console.log(error) : console.log(`Your html is ready!
+            ${JSON.stringify(userInput)}`));
     });
 
 // const test =(userInput) => {
