@@ -1,69 +1,100 @@
-const inquirer = require('inquirer');
+/**
+ * List prompt example
+ */
+
+// 'use strict';
+const { isNumber, toNumber } = require('lodash');
+// const { Timestamp } = require('rxjs/internal/operators/timestamp');
+const inquirer = require('..');
+// let repeat = true
 const fs = require('fs');
 
 
-// 
 const htmlContent = (userInput) =>
 
-    `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employees</title>
-</head>
-<body>
-
-    <ul>
-        <li>Manager: ${userInput.manager}</li>
-        <li>Engineer: ${userInput.engineer}</li>
-        <li>Intern: ${userInput.name}</li>
-    </ul>
-
-        <script src="index.js"></script>
-</body>
-</html>
-
-    `;
+    ``;
 
 
-// 
-inquirer.prompt([
-    // 
-    {
-        type: 'input',
-        name: 'manager',
-        message: "What is your manager's name?"
-    },
-    {
-        type: 'input',
-        name: 'engineer',
-        message: "Enter your engineer's name."
-    },
-    {
-        type: 'input',
-        name: 'intern',
-        message: "What's your intern's name?",
-        cap: function(name){
-            return name.toUpperCase
+
+
+let workers = ['Manager', 'Engineer', 'Intern']
+let list1 = [{
+
+    type: 'list',
+    name: 'employee',
+    message: 'Employee select',
+    choices: workers,
+    function: test = (val) => {
+        console.log(val)
+    }
+},
+{
+    type: 'input',
+    name: 'name',
+    message: 'Employee name?',
+    filter: (val) => {
+        return val.toLowerCase();
+        if (1 === 1) {
+
         }
     },
-])
-    // 
-    .then((userInput) => {
+},
+{
+    type: 'number',
+    name: 'id',
+    message: 'Employee id?',
+    validate: (val) => {
+        if (val === toNumber(val)) {
+            return true;
+        }
+        return 'need a number'
+    }
+},
+{
+    type: 'input',
+    name: 'email',
+    message: 'Employee email?',
+    validate: (val) => {
+        if (val == '@') {
+            console.log('hello bob');
+            return true;
+        }
+    }
+},
+]
 
-        const htmlFile = htmlContent(userInput);
 
-        // test(userInput)
+let manage = 0
 
-        // 
-        fs.writeFile('index.html', htmlFile, (error) =>
-            error ? console.log(error) : console.log(`Your html is ready!
-            ${JSON.stringify(userInput)}`));
-    });
+function ask() {
 
-// const test =(userInput) => {
-//     console.log(`this is the console log: ${userInput.manager}`);
-// }
+
+    inquirer.prompt([
+        list1[0],
+        {
+            type: 'list',
+            name: 'repeat',
+            message: 'Finish building team?',
+            choices: ['yes', 'no']
+        },
+    ])
+        .then((userInput) => {
+
+            const htmlFile = htmlContent(userInput);
+
+            if (userInput.employee == 'Manager') {
+                workers.splice(0, 1)
+                // return manage = 1
+
+            }
+
+            if (userInput.repeat == 'no') {
+                ask()
+            } else {
+
+                fs.writeFile('index.html', htmlFile, (error) =>
+                    error ? console.log(error) : console.log(`Your html is ready!${JSON.stringify(userInput)}`));
+            }
+        })
+}
+ask()
