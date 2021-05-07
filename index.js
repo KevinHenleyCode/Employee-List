@@ -5,7 +5,7 @@
 // 'use strict';
 const { isNumber, toNumber } = require('lodash');
 // const { Timestamp } = require('rxjs/internal/operators/timestamp');
-const inquirer = require('..');
+const inquirer = require('inquirer');
 // let repeat = true
 const fs = require('fs');
 
