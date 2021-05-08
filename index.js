@@ -179,7 +179,7 @@ function ask() {
         {
             type: 'list',
             name: 'start',
-            message: "Welcome to the employee entrey terminal. Please press start to begin.",
+            message: "Welcome to the employee entry terminal. Please press start to begin.",
             choices: ['Start']
         }
 
