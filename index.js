@@ -130,45 +130,61 @@ let intern = [
 
 const htmlContent = (userInput, Manager, Engineer, Intern) =>
     `
-                <body>
+    <!DOCTYPE html>
+    <lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style/style.css">
+        <title>Employee List</title>
+    </head>
 
-    <header>
-        <h1>My Team</h1>
-    </header>
+    <body>
 
-    <div class="employees">
-        <div class="card">
-            <h2>${userInput.managerName}</h2>
-            <h3>Manager</h3>
-            <ul>
-                <li>ID: ${userInput.managerId}</li>
-                <li><a href="${userInput.managerEmail}">${userInput.managerEmail}</a></li>
-                <li>${userInput.managerOffice}</li>
-            </ul>
+        <header>
+            <h1>My Team</h1>
+        </header>
+
+        <div class="employees">
+            <div class="card">
+                <div>
+                    <h2>${userInput.managerName}</h2>
+                    <h3>Manager</h3>
+                </div>
+                <ul>
+                    <li>ID: ${userInput.managerId}</li>
+                    <li>Email: <a href="${userInput.managerEmail}">${userInput.managerEmail}</a></li>
+                    <li>Office Number: ${userInput.managerOffice}</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div>
+                    <h2>${userInput.engineerName}</h2>
+                    <h3>Engineer</h3>
+                </div>
+                <ul>
+                    <li>ID: ${userInput.engineerId}</li>
+                    <li>Email: <a href="${userInput.engineerEmail}">${userInput.engineerEmail}</a></li>
+                    <li>GitHub: <a href="https://github.com/${userInput.engineerGithub}">https://github.com/${userInput.engineerGithub}</a></li>
+                </ul>
+            </div>
+            <div class="card">
+                <div>
+                    <h2>${userInput.internName}</h2>
+                    <h3>Intern</h3>
+                </div>
+                <ul>
+                    <li>ID: ${userInput.internId}</li>
+                    <li>Email: <a href="${userInput.internEmail}">${userInput.internEmail}</a></li>
+                    <li>School: ${userInput.internSchool}</li>
+                </ul>
+            </div>
         </div>
-        <div class="card">
-            <h2>${userInput.engineerName}</h2>
-            <h3>Engineer</h3>
-            <ul>
-                <li>ID: ${userInput.engineerId}</li>
-                <li><a href="${userInput.engineerEmail}">${userInput.engineerEmail}</a></li>
-                <li><a href="https://github.com/${userInput.engineerGithub}">https://github.com/${userInput.engineerGithub}</a></li>
-            </ul>
-        </div>
-        <div class="card">
-            <h2>${userInput.internName}</h2>
-            <h3>Intern</h3>
-            <ul>
-                <li>ID: ${userInput.internId}</li>
-                <li><a href="${userInput.internEmail}">${userInput.internEmail}</a></li>
-                <li>${userInput.internSchool}</li>
-            </ul>
-        </div>
-    </div>
 
-</body>
+    </body>
 
-</html>
+    </html>
                 `;
 
 
