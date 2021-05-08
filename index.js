@@ -9,24 +9,35 @@ const inquirer = require('inquirer');
 // let repeat = true
 const fs = require('fs');
 
+class Employee {
+    constructor(name, id, email, extra){
+        this.name = name;
+        this.id = id;
+        this.email = email;
+        this.extra = extra;
+    }
+}
+
+
+
 let info = []
-const htmlContent = (userInput) =>
-
-    ``;
 
 
 
 
-let workers = ['Manager', 'Engineer', 'Intern']
+
+
+
+let workers = ['Engineer', 'Intern','Finished']
 let manager = [
 {
     type: 'input',
-    name: 'name',
-    message: 'Employee name?',
+    name: 'managerName',
+    message: "Enter manager's name",
 },
 {
     type: 'number',
-    name: 'id',
+    name: 'managerId',
     message: 'Employee id?',
     validate: (val) => {
         if (val === toNumber(val)) {
@@ -37,17 +48,12 @@ let manager = [
 },
 {
     type: 'input',
-    name: 'email',
-    message: 'Employee email?',
-    validate: (val) => {
-        if (val == '@') {
-            return true;
-        }
-    }
+    name: 'managerEmail',
+    message: 'Employee email?'
 },
 {
     type: 'number',
-    name: 'officNumber',
+    name: 'managerOffice',
     message: 'Office number?',
     validate: (val) => {
         if (val === toNumber(val)) {
@@ -55,23 +61,17 @@ let manager = [
         }
         return 'need a number'
     }
-},
-{
-    type: 'list',
-    name: 'employee',
-    message: 'Employee select',
-    choices: workers
 }
 ]
 let engineer = [
 {
     type: 'input',
-    name: 'name',
+    name: 'engineerName',
     message: 'Employee name?',
 },
 {
     type: 'number',
-    name: 'id',
+    name: 'engineerId',
     message: 'Employee id?',
     validate: (val) => {
         if (val === toNumber(val)) {
@@ -82,41 +82,24 @@ let engineer = [
 },
 {
     type: 'input',
-    name: 'email',
-    message: 'Employee email?',
-    validate: (val) => {
-        if (val == '@') {
-            return true;
-        }
-    }
+    name: 'engineerEmail',
+    message: 'Employee email?'
 },
 {
     type: 'input',
-    name: 'github',
+    name: 'engineerGithub',
     message: 'GitHub username:'
-},
-{
-    type: 'list',
-    name: 'finished',
-    message: 'Finish building team?',
-    choices: ['yes', 'no']
-},
-{
-        type: 'list',
-        name: 'employee',
-        message: 'Employee select',
-        choices: workers
 }
 ]
 let intern = [
 {
     type: 'input',
-    name: 'name',
+    name: 'internName',
     message: 'Employee name?',
 },
 {
     type: 'number',
-    name: 'id',
+    name: 'internId',
     message: 'Employee id?',
     validate: (val) => {
         if (val === toNumber(val)) {
@@ -127,41 +110,66 @@ let intern = [
 },
 {
     type: 'input',
-    name: 'email',
-    message: 'Employee email?',
-    validate: (val) => {
-        if (val == '@') {
-            return true;
-        }
-    }
+    name: 'internEmail',
+    message: 'Employee email?'
 },
 {
     type: 'input',
-    name: 'school',
+    name: 'internSchool',
     message: 'What school do you attend?'
-},
-{
-    type: 'list',
-    name: 'finished',
-    message: 'Finish building team?',
-    choices: ['yes', 'no']
-},
-{
-        type: 'list',
-        name: 'employee',
-        message: 'Employee select',
-        choices: workers
 }
 ]
 
 
-
-
-let choice = manager
-
 // if (userInput.employee == 'Manager') {
 //     console.log(list2[0]);
 // }
+
+
+
+
+const htmlContent = (userInput, Manager, Engineer, Intern) =>
+    `
+                <body>
+
+    <header>
+        <h1>My Team</h1>
+    </header>
+
+    <div class="employees">
+        <div class="card">
+            <h2>${userInput.managerName}</h2>
+            <h3>Manager</h3>
+            <ul>
+                <li>ID: ${userInput.managerId}</li>
+                <li><a href="${userInput.managerEmail}">${userInput.managerEmail}</a></li>
+                <li>${userInput.managerOffice}</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h2>${userInput.engineerName}</h2>
+            <h3>Engineer</h3>
+            <ul>
+                <li>ID: ${userInput.engineerId}</li>
+                <li><a href="${userInput.engineerEmail}">${userInput.engineerEmail}</a></li>
+                <li><a href="https://github.com/${userInput.engineerGithub}">https://github.com/${userInput.engineerGithub}</a></li>
+            </ul>
+        </div>
+        <div class="card">
+            <h2>${userInput.internName}</h2>
+            <h3>Intern</h3>
+            <ul>
+                <li>ID: ${userInput.internId}</li>
+                <li><a href="${userInput.internEmail}">${userInput.internEmail}</a></li>
+                <li>${userInput.internSchool}</li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+
+</html>
+                `;
 
 
 function ask() {
@@ -171,17 +179,16 @@ function ask() {
 
         {
             type: 'list',
-            name: 'employee',
-            message: 'Employee select',
-            choices: workers
+            name: 'start',
+            message: "Welcome to the employee entrey terminal. Please press start to begin.",
+            choices: ['Start']
         }
 
 
     ]).then((userInput) => {
 
-        if (userInput.employee == 'Manager') {
+        if (userInput.start == 'Start') {
 
-            workers.splice(0, 1)
             ask2(userInput)
             
         }
@@ -199,37 +206,42 @@ const ask2 = (userInput) => {
 
     inquirer.prompt([
 
-        ...choice
+        ...manager,
+        ...engineer,
+        ...intern
 
     ]).then((userInput) => {
 
-        if (userInput.employee == 'Engineer') {
-            choice = engineer
+        var Manager = new Employee(userInput.managerName, userInput.managerId, userInput.managerEmail, userInput.managerOffice)
+        var Engineer = new Employee(userInput.engineerName, userInput.engineerId, userInput.engineerEmail, userInput.engineerGithub)
+        var Intern = new Employee(userInput.internName, userInput.internId, userInput.internEmail, userInput.internSchool)
+        
 
-        }
-        if (userInput.employee == 'Intern') {
-            choice = intern
+        const htmlFile = htmlContent(userInput, Manager, Engineer, Intern);
 
-        }
 
-        const htmlFile = htmlContent(userInput);
-        let manage = 0
-        if (manage == 0) {
 
-            workers.splice(0, 1)
-            ask2()
-            return manage = 1
+       
+        globalThis.newManager = Manager
+        globalThis.newEngineer = Engineer
+        globalThis.newIntern = Intern
 
-        }
+        // if (userInput.employee == 'Finished') {
+         
+            info.push(Manager, Engineer, Intern)
+            
+            
+        console.log(`This is Manager: ${info[0].name} This is Engineer: ${info[1].name} This is Intern: ${info[2].name}`);
 
-        if (userInput.finished == 'no') {
-
-            ask2()
-        } else {
+    
 
             fs.writeFile('index.html', htmlFile, (error) =>
                 error ? console.log(error) : console.log(`Your html is ready!${JSON.stringify(userInput)}`));
-        }
+
+
+           
+        // }
+       
 
     })
 
