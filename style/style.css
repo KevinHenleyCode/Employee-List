@@ -1,13 +1,18 @@
+/* default settings */
 * {
     margin: 0;
     padding: 0;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
+
+/* background color for the page */
 body {
     background-color: rgb(187, 154, 144);
 }
 
+
+/* styles the header and the h1 content */
 header {
     display: flex;
     justify-content: center;
@@ -16,13 +21,12 @@ header {
     padding: 20px;
     box-shadow: 0px 2px #4e4e4e;
 }
-
 h1 {
     font-size: 50px;
-
-
 }
 
+
+/* styles the the whole area containing the cards */
 .employees {
     display: flex;
     flex-direction: column;
@@ -30,6 +34,8 @@ h1 {
     margin-top: 100px;
 }
 
+
+/* styles each card */
 .card {
     background-color: rgb(160, 104, 151);
     width: 300px;
@@ -39,7 +45,6 @@ h1 {
     box-shadow: 2px 2px #4e4e4e;
     margin-bottom: 50px;
 }
-
 .card div {
     background-color: rgb(159, 218, 65);
     padding: 6px;
@@ -51,12 +56,10 @@ h1 {
     border-color: darkcyan;
     box-shadow: 2px 2px #4e4e4e;
 }
-
 h2 {
     margin-bottom: 6px;
     text-decoration: underline;
 }
-
 li {
     list-style: none;
     padding: 6px;
