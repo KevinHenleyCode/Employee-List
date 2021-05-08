@@ -1,14 +1,10 @@
-/**
- * List prompt example
- */
-
-// 'use strict';
+// brings in all of the needed packages
 const { isNumber, toNumber } = require('lodash');
-// const { Timestamp } = require('rxjs/internal/operators/timestamp');
 const inquirer = require('inquirer');
-// let repeat = true
 const fs = require('fs');
 
+
+// creates a constructor class
 class Employee {
     constructor(name, id, email, extra){
         this.name = name;
@@ -19,16 +15,7 @@ class Employee {
 }
 
 
-
-let info = []
-
-
-
-
-
-
-
-let workers = ['Engineer', 'Intern','Finished']
+// contains all of the objects used in prompt
 let manager = [
 {
     type: 'input',
@@ -121,13 +108,7 @@ let intern = [
 ]
 
 
-// if (userInput.employee == 'Manager') {
-//     console.log(list2[0]);
-// }
-
-
-
-
+// contains the string literal that is added to the html
 const htmlContent = (userInput, Manager, Engineer, Intern) =>
     `
     <!DOCTYPE html>
@@ -185,12 +166,14 @@ const htmlContent = (userInput, Manager, Engineer, Intern) =>
     </body>
 
     </html>
-                `;
+    `;
 
 
+// runs the main function that contains the prompt
 function ask() {
 
 
+    // starts the prompt
     inquirer.prompt([
 
         {
@@ -200,66 +183,47 @@ function ask() {
             choices: ['Start']
         }
 
-
+        // takes the user input
     ]).then((userInput) => {
 
+        // if Start is returned then calls ask2
         if (userInput.start == 'Start') {
-
             ask2(userInput)
-            
         }
 
         const htmlFile = htmlContent(userInput);
 
-        
     })
 }
 
 
+// calls the ask function
 ask()
 
+
+// creates the function ask 2 which contains the second prompt
 const ask2 = (userInput) => {
 
     inquirer.prompt([
 
+        // uses the spread operator to add the objects into the prompt
         ...manager,
         ...engineer,
         ...intern
 
     ]).then((userInput) => {
 
+        // creates sub classes to contain the user input
         var Manager = new Employee(userInput.managerName, userInput.managerId, userInput.managerEmail, userInput.managerOffice)
         var Engineer = new Employee(userInput.engineerName, userInput.engineerId, userInput.engineerEmail, userInput.engineerGithub)
         var Intern = new Employee(userInput.internName, userInput.internId, userInput.internEmail, userInput.internSchool)
         
 
         const htmlFile = htmlContent(userInput, Manager, Engineer, Intern);
-
-
-
-       
-        globalThis.newManager = Manager
-        globalThis.newEngineer = Engineer
-        globalThis.newIntern = Intern
-
-        // if (userInput.employee == 'Finished') {
-         
-            info.push(Manager, Engineer, Intern)
             
-            
-        console.log(`This is Manager: ${info[0].name} This is Engineer: ${info[1].name} This is Intern: ${info[2].name}`);
-
-    
-
+            // writes the user input to the string literal and creates the html file
             fs.writeFile('index.html', htmlFile, (error) =>
-                error ? console.log(error) : console.log(`Your html is ready!${JSON.stringify(userInput)}`));
-
-
-           
-        // }
-       
+                error ? console.log(error) : console.log(`Your html is ready!`));
 
     })
-
 }
-
