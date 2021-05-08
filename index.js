@@ -25,7 +25,7 @@ let manager = [
 {
     type: 'number',
     name: 'managerId',
-    message: 'Employee id?',
+    message: 'Manager id?',
     validate: (val) => {
         if (val === toNumber(val)) {
             return true;
@@ -36,7 +36,7 @@ let manager = [
 {
     type: 'input',
     name: 'managerEmail',
-    message: 'Employee email?'
+    message: 'Manager email?'
 },
 {
     type: 'number',
@@ -54,12 +54,12 @@ let engineer = [
 {
     type: 'input',
     name: 'engineerName',
-    message: 'Employee name?',
+    message: 'Engineer name?',
 },
 {
     type: 'number',
     name: 'engineerId',
-    message: 'Employee id?',
+    message: 'Engineer id?',
     validate: (val) => {
         if (val === toNumber(val)) {
             return true;
@@ -70,24 +70,24 @@ let engineer = [
 {
     type: 'input',
     name: 'engineerEmail',
-    message: 'Employee email?'
+    message: 'Engineer email?'
 },
 {
     type: 'input',
     name: 'engineerGithub',
-    message: 'GitHub username:'
+    message: 'Engineer GitHub username:'
 }
 ]
 let intern = [
 {
     type: 'input',
     name: 'internName',
-    message: 'Employee name?',
+    message: 'Intern name?',
 },
 {
     type: 'number',
     name: 'internId',
-    message: 'Employee id?',
+    message: 'Intern id?',
     validate: (val) => {
         if (val === toNumber(val)) {
             return true;
@@ -98,12 +98,12 @@ let intern = [
 {
     type: 'input',
     name: 'internEmail',
-    message: 'Employee email?'
+    message: 'Intern email?'
 },
 {
     type: 'input',
     name: 'internSchool',
-    message: 'What school do you attend?'
+    message: 'Intern school?'
 }
 ]
 
